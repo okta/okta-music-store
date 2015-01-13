@@ -4,9 +4,9 @@
     </li>
     if (Roles.IsUserInRole("StoreManager"))
     {
-        <li>@Html.ActionLink("Manage Store", "Index", "StoreManager")</li>
-        <li>@Html.ActionLink("Manage Users", "Index", "UserManager")</li>
-        <li>@Html.ActionLink("Manage Groups", "Index", "GroupManager")</li>
+        <li>@Html.ActionLink("Edit Store", "Index", "StoreManager")</li>
+        <li>@Html.ActionLink("Users", "Index", "UserManager")</li>
+        <li>@Html.ActionLink("Groups", "Index", "GroupManager")</li>
     }
     foreach (OktaProviders.OktaAppLink app in ((OktaProviders.OktaIdentity)User.Identity).Apps)
     {

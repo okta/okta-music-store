@@ -59,7 +59,7 @@ namespace Mvc4MusicStore.Models
     public class LoginModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "User name (email address)")]
         public string UserName { get; set; }
 
         [Required]
@@ -74,7 +74,7 @@ namespace Mvc4MusicStore.Models
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "User name (email address)")]
         public string UserName { get; set; }
 
         [Required]
