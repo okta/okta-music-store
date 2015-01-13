@@ -28,6 +28,27 @@ namespace Mvc4MusicStore.Controllers
             Session[ShoppingCart.CartSessionKey] = UserName;
         }
 
+        private ActionResult RedirectToOktaOrHome(string UserName)
+        {
+            var redirectUrl = this.Url.Action("Index", "Home", null, this.Request.Url.Scheme);
+            if (HttpContext.Items.Contains(UserName))
+            {
+                // If we have a cookieToken, redirect the user to Okta so that they get a cookie from Okta too.
+                var cookieToken = HttpContext.Items[UserName] as String;
+                var oktaApiUrl = new Uri(ConfigurationManager.AppSettings["okta:ApiUrl"]);
+
+                var cookieTokenUrl = String.Format("{0}login/sessionCookieRedirect?token={1}&redirectUrl={2}",
+                    oktaApiUrl.AbsoluteUri,
+                    cookieToken,
+                    redirectUrl);
+                return Redirect(cookieTokenUrl);
+            }
+            else
+            {
+                return Redirect(redirectUrl);
+            }
+        }
+
         //
         // GET: /Account/Login
 
@@ -50,23 +71,7 @@ namespace Mvc4MusicStore.Controllers
             {
                 MigrateShoppingCart(model.UserName);
 
-                if (HttpContext.Items.Contains(model.UserName))
-                {
-                    // If we have a cookieToken, redirect the user to Okta so that they get a cookie from Okta too.
-                    var cookieToken = HttpContext.Items[model.UserName] as String;
-                    var oktaApiUrl = new Uri(ConfigurationManager.AppSettings["okta:ApiUrl"]);
-                    var redirectUrl = this.Url.Action("Index", "Home", null, this.Request.Url.Scheme);
-                    
-                    var cookieTokenUrl = String.Format("{0}login/sessionCookieRedirect?token={1}&redirectUrl={2}",
-                        oktaApiUrl.AbsoluteUri,
-                        cookieToken,
-                        redirectUrl);
-                    return Redirect(cookieTokenUrl);
-                }
-                else
-                {
-                    return RedirectToLocal(returnUrl);
-                }
+                return RedirectToOktaOrHome(model.UserName);
             }
 
             // If we got this far, something failed, redisplay form
@@ -111,7 +116,7 @@ namespace Mvc4MusicStore.Controllers
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password, model);
                     WebSecurity.Login(model.UserName, model.Password);
                     MigrateShoppingCart(model.UserName);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToOktaOrHome(model.UserName);
                 }
                 catch (MembershipCreateUserException e)
                 {
