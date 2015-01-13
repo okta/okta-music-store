@@ -9,18 +9,17 @@
 </p>
 <div id="album-details">
     <p>
-        <em>Genre:</em>
+        <b>Genre:</b>
         @Model.Genre.Name
     </p>
     <p>
-        <em>Artist:</em>
+        <b>Artist:</b>
         @Model.Artist.Name
     </p>
     <p>
-        <em>Price:</em>
-        @String.Format("{0:F}", Model.Price)
-    </p>
-    <p class="button">
-        @Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = Model.AlbumId }, "")
+        <b>Price:</b>
+        @String.Format("{0:F}",
+Model.Price)
     </p>
 </div>
+@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = Model.AlbumId }, new { @class = "btn btn-primary" })

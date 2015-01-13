@@ -4,14 +4,14 @@
 }
 <div id="promotion">
 </div>
-<h3><em>Fresh</em> off the grill</h3>
+<h4>Fresh off the grill</h4>
 <ul id="album-list">
     @foreach (var album in Model)
     {
         <li>
             <a href="@Url.Action("Details", "Store",
                 new { id = album.AlbumId })">
-                <img alt="@album.Title" src="@album.AlbumArtUrl" />
+                <img alt="@album.Title" class="album" src="~/Content/Images/record-small.png" />
                 <span>@album.Title</span>
             </a>
         </li>

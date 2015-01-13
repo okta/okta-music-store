@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>@ViewBag.Title @Html.DisplayFor(model => model.userName)</h2>
 
 <div>
     @Html.ActionLink("Cancel", "Index")
@@ -13,12 +13,11 @@
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>@Html.DisplayFor(model => model.userName)</legend>
+    <div class="form-wrapper">
         <div class="editor-label">
             @Html.LabelFor(model => model.isManager)
         </div>
-        <div class="editor-field">
+        <div>
             @Html.CheckBoxFor(model => model.isManager)
         </div>
         <div class="editor-label">
@@ -27,8 +26,8 @@
         <div class="editor-field">
             @Html.DropDownList("RecordLabel", String.Empty) 
         </div>
-        <input type="submit" value="Update" />
-    </fieldset>
+        <input type="submit" class="btn btn-primary" value="Update" />
+    </div>
 }
 @Html.ActionLink("Delete User", "Delete", new { username = @Model.userName })
 

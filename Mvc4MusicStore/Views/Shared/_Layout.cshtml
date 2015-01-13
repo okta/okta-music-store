@@ -4,34 +4,42 @@
         <meta charset="utf-8" />
         <title>@ViewBag.Title</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400|Lobster|Vollkorn' rel='stylesheet' type='text/css'>
         <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/bootstrap.min.css", "~/Content/Site.css", "~/Content/forms.css")
         @Scripts.Render("~/bundles/modernizr")
     </head>
 <body>
-    <div id="header">
-        <h1>
-            <a href="/">
-                ASP.NET MVC MUSIC STORE
-            </a>
-        </h1>
-        <ul id="navlist">
-            <li class="first">
-                <a href="@Url.Content("~")" id="current">
-                    Home
-                </a>
-            </li>
-            <li><a href="@Url.Content("~/Store/")">Store</a></li>
-            <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
-            @Html.Partial("_LoginPartial");
-        </ul>
+    <div id="header" class="navbar-fixed-top">
+        <div class="header-container clearfix">
+            <h1>
+                Music Store
+            </h1>
+            <ul id="navlist">
+                <li class="first">
+                    <a href="@Url.Content("~")" id="current">
+                        Home
+                    </a>
+                </li>
+                <li><a href="@Url.Content("~/Store/")">Store</a></li>
+                <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
+                @Html.Partial("_LoginPartial")
+            </ul>
+        </div>
     </div>
-    @{Html.RenderAction("GenreMenu", "Store");}
     <div id="main">
-        @RenderBody()
-    </div>
-    <div id="footer">
-        built with <a href="http://asp.net/mvc">ASP.NET MVC 4</a>
+        <div class="content-center clearfix">
+            <div class="col-wrapper">
+                <div class="col left-col">
+                    @{Html.RenderAction("GenreMenu", "Store");}
+                </div>
+                <div class="col right-col">
+                    <div class="content">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)

@@ -6,11 +6,11 @@
 {
 
     <h2>Address And Payment</h2>
-    <fieldset>
+    <fieldset class="form-wrapper">
         <legend>Shipping Information</legend>
         @Html.EditorForModel()
     </fieldset>
-    <fieldset>
+    <fieldset class="form-wrapper">
         <legend>Payment</legend>
         <p>
             We're running a promotion: all music is free
@@ -24,7 +24,7 @@
         </div>
     </fieldset>
 
-    <input type="submit" value="Submit Order" />
+    input type="submit" value="Submit Order" />
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

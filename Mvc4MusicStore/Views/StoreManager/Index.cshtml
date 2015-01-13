@@ -12,9 +12,9 @@
 }
 <h2>Index</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add Album", "Create", null, new { @class = "btn btn-primary" })
 </p>
-<table>
+<table class="table table-striped">
     <tr>
         <th>
             Genre
@@ -30,7 +30,8 @@
         </th>
         <th></th>
     </tr>
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Genre.Name)
@@ -45,10 +46,10 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.AlbumId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.AlbumId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.AlbumId })
+                @Html.ActionLink("Edit", "Edit", new { id = item.AlbumId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.AlbumId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.AlbumId })
             </td>
         </tr>
-}
+    }
 </table>

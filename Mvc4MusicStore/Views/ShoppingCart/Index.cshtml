@@ -30,14 +30,14 @@
     });
 </script>
 <h3>
-    <em>Review</em> your cart:
+    Review your cart:
 </h3>
 <p class="button">
     @Html.ActionLink("Checkout >>", "AddressAndPayment", "Checkout")
 </p>
 <div id="update-message">
 </div>
-<table>
+<table class="table table-bordered">
     <tr>
         <th>
             Album Name
@@ -73,7 +73,7 @@ Model.CartItems)
             </td>
         </tr>
     }
-    <tr>
+    <tr class="row-total">
         <td>
             Total
         </td>
@@ -84,3 +84,4 @@ Model.CartItems)
         </td>
     </tr>
 </table>
+@Html.ActionLink("Checkout", "AddressAndPayment", "Checkout", null, new { @class = "btn btn-primary btn-checkout" })

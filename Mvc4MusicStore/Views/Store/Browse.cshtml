@@ -4,7 +4,7 @@
 }
 
 <div class="genre">
-    <h3><em>@Model.Name</em> Albums</h3>
+    <h2>@Model.Name Albums</h2>
 
     <ul id="album-list">
         @foreach (var album in Model.Albums)
@@ -12,8 +12,8 @@
             <li>
                 <a href="@Url.Action("Details",
                     new { id = album.AlbumId })">
-                    <img alt="@album.Title"
-                         src="@album.AlbumArtUrl" />
+                    <img class="album" alt="@album.Title"
+                         src="~/Content/Images/record-small.png" />
                     <span>@album.Title</span>
                 </a>
             </li>

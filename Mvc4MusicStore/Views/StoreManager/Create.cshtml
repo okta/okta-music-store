@@ -4,31 +4,27 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h3>Add album</h3>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Album</legend>
-
+    <div class="form-wrapper">
         <div class="editor-label">
             @Html.LabelFor(model => model.GenreId, "Genre")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("GenreId", String.Empty)
+            @Html.DropDownList("GenreId", "Select a genre")
             @Html.ValidationMessageFor(model => model.GenreId)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.ArtistId, "Artist")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("ArtistId", String.Empty)
+            @Html.DropDownList("ArtistId", "Select an artist")
             @Html.ValidationMessageFor(model => model.ArtistId)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Title)
         </div>
@@ -36,7 +32,6 @@
             @Html.EditorFor(model => model.Title)
             @Html.ValidationMessageFor(model => model.Title)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Price)
         </div>
@@ -44,7 +39,6 @@
             @Html.EditorFor(model => model.Price)
             @Html.ValidationMessageFor(model => model.Price)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.AlbumArtUrl)
         </div>
@@ -52,11 +46,8 @@
             @Html.EditorFor(model => model.AlbumArtUrl)
             @Html.ValidationMessageFor(model => model.AlbumArtUrl)
         </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+        <input type="submit" class="btn btn-primary" value="Add Album" />
+    </div>
 }
 
 <div>

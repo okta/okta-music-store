@@ -5,12 +5,24 @@
 	border: none;
 }
 
+html, body {
+    /* height: 100%; */
+}
+
 body
 {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Open Sans", Arial, Helvetica, sans-serif;
 	font-size: 14px;
-	background-color: #FBF9EF;
-	padding: 0px 6%;
+	background-color: #D8D8D8; 
+    color: #4D4D4D;
+}
+
+.clearfix:after {
+   content: " "; 
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
 }
 
 #container
@@ -18,20 +30,57 @@ body
 	float: left;
 }
 
-#header
-{
-	float: left;
-	width: 100%;
-	border-bottom: 1px dotted #5D5A53;
-	margin-bottom: 10px;
+#header {
+    background-color: #3a3a3a;
 }
 
-#header h1
-{
-	font-size: 18px;
-	float: left;
-	background: url(/content/Images/logo.png) no-repeat;
-	padding: 45px 0px 5px 0px;
+#header h1 {
+    font-family: "Lobster", cursive;
+    color: #ffffff;
+    float: left;
+    margin: 0;
+}
+
+.header-container,
+.content-container {
+    width: 1100px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.content-center {
+    height: 100%;
+    width: 1100px;
+    margin: 0 auto; 
+    background-color: #fff;
+}
+
+.col-wrapper {
+    display: table;
+    height: 100%;
+}
+
+.col {
+    display: table-cell;
+    vertical-align: top;
+    height: 100%;
+}
+
+.left-col {
+    color: #D7B9B6;
+    width: 200px;
+    padding: 40px;
+    background-color: #B64D44;
+}
+
+.right-col {
+    width: 900px;
+    padding: 20px 40px;
+}
+
+.content {
+    min-height: 700px;
+    height: 100%;
 }
 
 #promotion
@@ -39,6 +88,11 @@ body
 	height: 300px; 
 	width: 700px; 
 	background: url(/content/Images/home-showcase.png) no-repeat;
+}
+
+p, span, h1, h2, h3, h4, li {
+    font-weight: normal;
+    color: #4D4D4D; 
 }
 
 ul li a
@@ -49,13 +103,13 @@ ul li a
 #main
 {
 	overflow: hidden;
-	padding: 0 0 15px 10px;
-	float: left;
+    padding-top: 80px;
+    height: 100%;
 }
 
 ul
 {
-	list-style-type: square;
+	list-style-type: disc;
 	margin-left: 25px;
 	font-size: 14px;
 }
@@ -64,27 +118,27 @@ ul#album-list
 {
 	list-style: none;
 	margin-left: 0px;
+    margin-right: -16px;
 }
 
 ul#album-list li
 {
-	height: 130px;
-	width: 100px;
-	float: left;
-	margin: 10px;
-	text-align: center;
+	height: 150px;
+    width: 150px;
+    float: left;
+    margin-right: 16px;
+    margin-bottom: 12px;
+    text-align: center;
 }
 
-ul#album-list li a, ul#album-list li .button
-{
-	font-size: 13px;
-	float: left;
+img.album {
+    padding: 0 10px;
 }
 
 ul#album-list li a span
 {
-	color: #9b9993;
-	text-decoration: underline;
+	font-size: 14px;
+    display: block;
 }
 
 #cart
@@ -94,35 +148,16 @@ ul#album-list li a span
 
 #update-message
 {
-	color: #F6855E;
+	color: #5E5E5E;
 	font-weight: bold;
-}
-
-.button, input[type=submit]
-{
-	clear: both;
-	display: inline-block;
-	padding: 5px;
-	margin-top: 10px; 
-	border: 1px;
-	background: #5e5b54;
-	color: #fff;
-	font-weight: bold;
-}
-
-.button a
-{
-	color: #fff !important;
+    margin-bottom: 10px;
 }
 
 #footer
 {
-	clear: both;
-	padding: 10px;
 	text-align: right;
-	border-top: 1px dotted #8A8575;
-	border-bottom: 1px dotted #8A8575;
-	font-family: Constantia, Georgia, serif;
+    font-size: 0.9em;
+    color: #fff;
 }
 
 /******************** Top Navigation ************************/
@@ -138,12 +173,16 @@ ul#navlist li
 
 ul#navlist li a
 {
-	border-left: 1px dotted #8A8575;
-	padding: 10px;
-	margin-top: 10px;
-	color: #8A8575;
-	text-decoration: none;
-	float: left;
+padding: 10px;
+color: #D8CAC9;
+text-decoration: none;
+float: left;
+font-weight: 400;
+}
+
+ul#navlist li form
+{
+float: left;
 }
 
 ul#navlist li:first-child a
@@ -153,7 +192,9 @@ ul#navlist li:first-child a
 
 ul#navlist li a:hover
 {
-	color: #F6855E;
+    background-color: #803B35;
+    color: #ECDDDB;
+    border-radius: 4px;
 }
 
 /********************* End top navigation ***************************/
@@ -166,10 +207,12 @@ p
 
 h2
 {
-	color: #5e5b54;
+    font-size: 30px; 
+    font-family: "Vollkorn", serif;
+    text-transform: uppercase;
 }
 
-h2, h3
+/*h2, h3
 {
 	margin-bottom: 10px;
 	font-size: 16px;
@@ -180,93 +223,50 @@ h2, h3
 h3
 {
 	color: #9B9993;
-}
+}*/
 
-#header h1 a, h3 em
+a:link, a:visited, a:active
 {
-	color: #5E5B54;
-}
-
-a:link, a:visited
-{
-	color: #F6855E;
-	text-decoration: none;
-	font-weight: bold;
+	color: #6D91B5;
+	text-decoration: none !important;
 }
 
 a:hover
 {
-	color: #333333;
-	text-decoration: none;
-	font-weight: bold;
-}
-
-a:active
-{
-	color: #006633;
-	text-decoration: none;
-	font-weight: bold;
+	color: #4D667F;
+	text-decoration: none !important;
 }
 
 /***************************** sidebar navigation ****************************/
 
 #categories
 {
-	font-family: Constantia, Georgia, serif;
 	list-style-type: none;
-	border-right: #5d5a53 1px dotted;
-	padding-right: 10px;
 	margin: 0 25px 0 0;
 	float: left;
+    width: 100%;
 }
 
-#categories a:link, #categories a:visited
+#categories a
 {
-	color: #9B9993;
+	color: #D7B9B6;
 	text-decoration: none;
 }
 
 #categories a:hover
 {
-	color: #F46739;
+	color: #fff;
+}
+
+/* Album detail view */
+
+div#album-details {
+    margin-bottom: 10px;
 }
 
 div#album-details p
 {
 	margin-bottom: 5px;
-	color: #5e5b54;
-	font-weight: bold;
-}
-
-p em
-{
-	color: #9b9993;
-}
-
-/* Form styles */
-legend
-{
-	padding: 10px;
-	font-weight: bold;
-}
-
-fieldset
-{
-	border: #9b9993 1px solid;
-	padding: 0 10px;
-	margin-bottom: 10px;
-	clear: left;
-}
-
-div.editor-field
-{
-	margin-bottom: 10px;
-}
-
-input[type=text], input[type=password], select
-{
-	border: 1px solid #8A8575;
-	width: 300px;
 }
 
 /* Styles for validation helpers */
@@ -293,52 +293,20 @@ input[type=text], input[type=password], select
 }
 
 /* Tables */
-table
-{
-	border: 1px solid #000;
-	border-collapse: collapse;
-	color: #666666;
-	min-width: 500px;
-	width: 100%;
+tr.row-total td {
+    border-width: 0 !important;
 }
 
-tr
-{
-	border: 1px solid #000;
-	line-height: 25px;
+th {
+    background-color: #F9F9F9;
 }
 
-th
-{
-	background-color: #9b9993;
-	color: #000;
-	font-size: 13px;
-	text-align: left;
+/* Buttons */
+.btn a,
+a.btn {
+    color: #ffffff;
 }
 
-th, td
-{
-	padding-left: 5px;
-}
-
-tr:hover
-{
-	background-color: #fff;
-}
-
-/* This removes the numbers on the Login page */
-
-fieldset ol
-{
-    list-style-type: none;
-}
-
-fieldset label
-{
-    display: block;
-}
-
-fieldset ol li
-{
-    margin: 10px;
+.btn-checkout {
+    float: right;
 }
