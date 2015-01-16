@@ -109,6 +109,8 @@ namespace OktaProviders
         public GroupsClient groups { get; set; }
         public SessionsClient sessions { get; set; }
         public AppsClient apps { get; set; }
+        public AuthClient authn { get; set; }
+        public OrgFactorsClient factors { get; set; }
 
         private void Setup(string apiToken, Uri baseUri)
         {
@@ -121,6 +123,8 @@ namespace OktaProviders
             groups = client.GetGroupsClient();
             sessions = client.GetSessionsClient();
             apps = client.GetAppsClient();
+            authn = new AuthClient(settings);
+            factors = new OrgFactorsClient(settings);
         }
 
         public OktaProviderClient()

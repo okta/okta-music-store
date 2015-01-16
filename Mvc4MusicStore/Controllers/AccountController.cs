@@ -12,6 +12,7 @@ using Mvc4MusicStore.Filters;
 using Mvc4MusicStore.Models;
 using OktaProviders;
 using System.Configuration;
+using Okta.Core.Models;
 
 namespace Mvc4MusicStore.Controllers
 {
@@ -27,12 +28,18 @@ namespace Mvc4MusicStore.Controllers
             cart.MigrateCart(UserName);
             Session[ShoppingCart.CartSessionKey] = UserName;
         }
-
+        private ActionResult RedirectToOktaOrHome()
+        {
+            var UserName = HttpContext.User.Identity.Name;
+            return RedirectToOktaOrHome(UserName);
+        }
         private ActionResult RedirectToOktaOrHome(string UserName)
         {
             var redirectUrl = this.Url.Action("Index", "Home", null, this.Request.Url.Scheme);
             if (HttpContext.Items.Contains(UserName))
             {
+                // FIXME: Get the session from Okta and redirect set the redirectUrl to the RelayState if it's there
+
                 // If we have a cookieToken, redirect the user to Okta so that they get a cookie from Okta too.
                 var cookieToken = HttpContext.Items[UserName] as String;
                 var oktaApiUrl = new Uri(ConfigurationManager.AppSettings["okta:ApiUrl"]);
@@ -67,16 +74,56 @@ namespace Mvc4MusicStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            // Immediately return if we have an invalid ModelState
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                return View(model);
+            }
+
+            var authResponseKey = String.Format("{0}_AuthResponse", model.UserName);
+            var oktaStateTokenKey = "oktaStateToken";
+            HttpContext.Items["relayState"] = returnUrl;
+            // Try the username/password pair
+            // This will return "false" if there is an MFA step, so we will check for that next
+            if (WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
                 MigrateShoppingCart(model.UserName);
 
                 return RedirectToOktaOrHome(model.UserName);
             }
+            else if (HttpContext.Items.Contains(authResponseKey))
+            {
+                AuthResponse response = (AuthResponse)HttpContext.Items[authResponseKey];
+                Session[oktaStateTokenKey] = response.StateToken;
+                // FIXME: AuthStatus seems to be missing "MFA_ENROLL"
+                if (response.Status == "MFA_ENROLL")
+                {
+                    return RedirectToLocal("/Mfa/Add");
+                }
+                else if (response.Status == AuthStatus.MfaRequired)
+                {
+                    return RedirectToLocal("/Mfa/Verify");
+                }
+                else if (response.Status == AuthStatus.PasswordExpired)
+                {
+                    return RedirectToLocal("/Account/PasswordExpired");
+                }
+                else if (response.Status == AuthStatus.PasswordReset)
+                {
+                    //  /Account/PasswordReset
+                }
+            }
 
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
+            ModelState.AddModelError("", "Error logging in.");
             return View(model);
+        }
+
+        // GET: /Account/CompleteMfa
+        public ActionResult CompleteMfa()
+        {
+            return RedirectToOktaOrHome();
         }
 
         //
@@ -300,12 +347,12 @@ namespace Mvc4MusicStore.Controllers
                 // Insert a new user into the database
                 using (UsersContext db = new UsersContext())
                 {
-                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    Models.UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
                     if (user == null)
                     {
                         // Insert name into the profile table
-                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                        db.UserProfiles.Add(new Models.UserProfile { UserName = model.UserName });
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);

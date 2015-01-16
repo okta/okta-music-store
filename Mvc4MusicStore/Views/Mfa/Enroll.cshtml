@@ -1,0 +1,24 @@
+﻿@model Mvc4MusicStore.Models.Otp
+@{
+    ViewBag.Title = "Enroll";
+}
+
+<h2>Enroll</h2>
+
+@if (ViewBag.FactorType == "token:software:totp")
+{
+    <img src="@ViewBag.QRCode.Href" alt="QR Code of OTP shared secret, this is meant to be scanned by an OTP mobile application" />
+    <!--
+    For debugging purposes, you can use this TOTP debugger: https://google-authenticator.googlecode.com/git/libpam/totp.html
+    In the box labled "Enter secret key in BASE32", use the secret key of: "@ViewBag.SharedSecret"
+    -->
+    @Html.Partial("_TokenSoftwareTotpPartial")
+}
+else 
+{
+    <div>The MVC Music Store doesn't support that token type yet.</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
