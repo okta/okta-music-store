@@ -9,3 +9,7 @@ TestResults/
 packages/
 .#*
 .DS_Store
+*.config
+
+# Emacs auto-save files
+*~
