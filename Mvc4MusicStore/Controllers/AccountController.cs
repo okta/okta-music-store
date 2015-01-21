@@ -96,8 +96,7 @@ namespace Mvc4MusicStore.Controllers
             {
                 AuthResponse response = (AuthResponse)HttpContext.Items[authResponseKey];
                 Session[oktaStateTokenKey] = response.StateToken;
-                // FIXME: AuthStatus seems to be missing "MFA_ENROLL"
-                if (response.Status == "MFA_ENROLL")
+                if (response.Status == AuthStatus.MfaEnroll)
                 {
                     return RedirectToLocal("/Mfa/Add");
                 }
