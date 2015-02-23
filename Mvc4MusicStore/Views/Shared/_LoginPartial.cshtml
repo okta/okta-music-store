@@ -10,7 +10,7 @@
     }
     foreach (OktaProviders.OktaAppLink app in ((OktaProviders.OktaIdentity)User.Identity).Apps)
     {
-        <li><a href="@(app.linkUrl)">@(app.label)</a></li>
+        <li><a target="_blank" href="@(app.linkUrl)">@(app.label)</a></li>
     }
     <li>
     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
