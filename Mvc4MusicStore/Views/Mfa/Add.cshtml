@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Okta.Core.Models.Factor>
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Add Factor</h2>
+
+<ol>
+@foreach (var factor in Model)
+    {
+    <li>@factor.FactorType</li>
+    }
+</ol>

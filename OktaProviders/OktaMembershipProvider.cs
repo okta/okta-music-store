@@ -123,10 +123,17 @@ namespace OktaProviders
         {
             try
             {
-                Session session = okta.sessions.Create(username, password, TokenAttribute.CookieToken);
-                if (session.CookieToken != null)
+                string relayState = (string)HttpContext.Current.Items["relayState"];
+                // FIXME: Consider passing in a "context" object.
+                AuthResponse response = okta.authn.Authenticate(username, password, relayState);
+                var cookieToken = response.SessionToken;
+
+                string mfaResponseString = String.Format("{0}_AuthResponse", username);
+                HttpContext.Current.Items[mfaResponseString] = response;
+
+                if (response.Status == AuthStatus.Success && cookieToken != null)
                 {
-                    HttpContext.Current.Items[username] = session.CookieToken;
+                    HttpContext.Current.Items[username] = cookieToken;
                     return true;
                 }
             }

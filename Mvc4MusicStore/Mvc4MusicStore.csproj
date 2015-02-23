@@ -46,9 +46,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Okta.Core">
-      <HintPath>..\packages\Okta.Core.Client.0.0.8.0\lib\Okta.Core.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -206,6 +203,7 @@
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\GroupManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MfaController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\StoreManagerController.cs" />
@@ -222,6 +220,7 @@
     <Compile Include="Models\MusicStoreEntities.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\Otp.cs" />
     <Compile Include="Models\SampleData.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\StoreUser.cs" />
@@ -365,6 +364,10 @@
     <Content Include="Views\GroupManager\Create.cshtml" />
     <Content Include="Views\GroupManager\Details.cshtml" />
     <Content Include="Views\GroupManager\Index.cshtml" />
+    <Content Include="Views\Mfa\Add.cshtml" />
+    <Content Include="Views\Mfa\Enroll.cshtml" />
+    <Content Include="Views\Mfa\Verify.cshtml" />
+    <Content Include="Views\Mfa\_TokenSoftwareTotpPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -373,6 +376,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\oktasdk-csharp\Okta.Core\Okta.Core.csproj">
+      <Project>{d80cf449-9b1e-4ef3-9eb0-7114c5294e6f}</Project>
+      <Name>Okta.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OktaProviders\OktaProviders.csproj">
       <Project>{458606b8-dc0d-461a-ad58-d5e390f44d34}</Project>
       <Name>OktaProviders</Name>
