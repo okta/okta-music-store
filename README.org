@@ -43,7 +43,7 @@
      recent version of Visual Studio available.
   2. Sign up for [[http://developer.okta.com/][Okta Developer Edition]].
 
-     You'll need an Okta "organization" of your own to use as you follow
+     You'll need an Okta /organization/ of your own to use as you follow
      this gude.
   3. /Optional:/ Sign up for a [[https://www.zendesk.com/register][30 day free trial of Zendesk]].
 

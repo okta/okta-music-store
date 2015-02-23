@@ -50,7 +50,7 @@ software and services below:
     recent version of Visual Studio available.
 2.  Sign up for [Okta Developer Edition](http://developer.okta.com/).
     
-    You'll need an Okta "organization" of your own to use as you follow
+    You'll need an Okta *organization* of your own to use as you follow
     this gude.
 3.  *Optional:* Sign up for a [30 day free trial of Zendesk](https://www.zendesk.com/register).
     
@@ -305,7 +305,6 @@ foundation that we'll build on in the rest of this guide.
     ```
 
 **Try it out: Log in to the Music Store using Okta**
-
 
 1.  Start the Music Store from Visual Studio using the "Play" button
     or by selecting the "DEBUG" menu and selecting "Start Debugging".
