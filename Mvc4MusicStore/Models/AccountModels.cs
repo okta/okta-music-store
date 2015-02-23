@@ -45,7 +45,9 @@ namespace Mvc4MusicStore.Models
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        // http://stackoverflow.com/a/5859963
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$",
+            ErrorMessage = "The password must be at least 8 characters long, with at least one upper-case and one lower-case letter.")]
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
         public string NewPassword { get; set; }
@@ -90,7 +92,9 @@ namespace Mvc4MusicStore.Models
         public string PhoneNumber { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        // http://stackoverflow.com/a/5859963
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$", 
+            ErrorMessage = "The password must be at least 8 characters long, with at least one upper-case and one lower-case letter.")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
