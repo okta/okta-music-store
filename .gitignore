@@ -9,3 +9,5 @@ TestResults/
 packages/
 .#*
 .DS_Store
+Mvc4MusicStore/*.config
+*~
