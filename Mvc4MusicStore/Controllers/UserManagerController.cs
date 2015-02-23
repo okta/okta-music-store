@@ -12,12 +12,12 @@ using WebMatrix.WebData;
 
 namespace Mvc4MusicStore.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "StoreManager")]
     [InitializeSimpleMembership]
     public class UserManagerController : Controller
     {
         private string designator = "brand:";
-        private string managerRoleName = "Administrator";
+        private string managerRoleName = "StoreManager";
 
         private IEnumerable<string> GroupsList()
         {

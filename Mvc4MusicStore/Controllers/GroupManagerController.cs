@@ -9,7 +9,7 @@ using System.Web.Security;
 
 namespace Mvc4MusicStore.Controllers
 {
-    // [Authorize(Roles = "Administrator")]
+    // [Authorize(Roles = "StoreManager")]
     public class GroupManagerController : Controller
     {
         private string designator = "brand:";

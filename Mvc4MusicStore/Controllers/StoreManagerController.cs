@@ -10,7 +10,7 @@ using Mvc4MusicStore.Filters;
 
 namespace Mvc4MusicStore.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "StoreManager")]
     [InitializeSimpleMembership]
     public class StoreManagerController : Controller
     {
