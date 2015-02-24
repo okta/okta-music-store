@@ -59,7 +59,7 @@ namespace Mvc4MusicStore.Controllers
 
         // GET: /Mfa/Enroll?factorType={string}
         public ActionResult Enroll(string factorType)
-        {           
+        {
             var stateToken = (string)Session[stateTokenKey];
             var status = okta.authn.GetStatus(stateToken);
             // FIXME: Allow the user to select the page they want to see
