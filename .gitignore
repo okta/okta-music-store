@@ -9,5 +9,6 @@ TestResults/
 packages/
 .#*
 .DS_Store
-Mvc4MusicStore/*.config
 *~
+Mvc4MusicStore/*.com.config
+Mvc4MusicStore/Okta.config
