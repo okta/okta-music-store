@@ -46,6 +46,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Okta.Core, Version=0.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Okta.Core.Client.0.1.4.0\lib\Okta.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -376,10 +380,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\oktasdk-csharp\Okta.Core\Okta.Core.csproj">
-      <Project>{d80cf449-9b1e-4ef3-9eb0-7114c5294e6f}</Project>
-      <Name>Okta.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OktaProviders\OktaProviders.csproj">
       <Project>{458606b8-dc0d-461a-ad58-d5e390f44d34}</Project>
       <Name>OktaProviders</Name>
