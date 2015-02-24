@@ -1,0 +1,20 @@
+﻿@model Mvc4MusicStore.Models.Otp
+
+@{
+    ViewBag.Title = "Verify";
+}
+
+<h2>Verify</h2>
+
+@if (ViewBag.FactorType == "token:software:totp")
+{
+    @Html.Partial("_TokenSoftwareTotpPartial")
+}
+else
+{
+    <div>The MVC Music Store doesn't support that token type yet.</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

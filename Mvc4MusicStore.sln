@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Web
-VisualStudioVersion = 12.0.30723.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc4MusicStore", "Mvc4MusicStore\Mvc4MusicStore.csproj", "{2A2D8C7E-ECC0-402C-AD6B-FFA68D5947B3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OktaProviders", "OktaProviders\OktaProviders.csproj", "{458606B8-DC0D-461A-AD58-D5E390F44D34}"
