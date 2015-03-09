@@ -99,12 +99,20 @@ namespace Mvc4MusicStore.Controllers
 
 
             #region if we have a returnUrl, turn it into an absolute URL
-            if (returnUrl != null && returnUrl.Contains('?'))
+            if (returnUrl != null)
             {
-                var parts = returnUrl.Split('?');
                 var uri = new System.UriBuilder(HttpContext.Request.Url.AbsoluteUri);
-                uri.Path = parts[0];
-                uri.Query = parts[1];
+                if(returnUrl.Contains('?'))
+                {
+                    var parts = returnUrl.Split('?');
+                    uri.Path = parts[0];
+                    uri.Query = parts[1];
+                }
+                else
+                {
+                    uri.Path = returnUrl;
+                    uri.Query = null;
+                }
                 returnUrl = uri.ToString();
             }
             #endregion

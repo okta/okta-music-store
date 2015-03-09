@@ -77,6 +77,8 @@ namespace Mvc4MusicStore.Models
     {
         [Required]
         [Display(Name = "User name (email address)")]
+        [RegularExpression(@"^[a-zA-Z0-9_\\.-]+@[a-zA-Z0-9_\\.-]+$",
+            ErrorMessage = "The username must be an email address")]
         public string UserName { get; set; }
 
         [Required]
