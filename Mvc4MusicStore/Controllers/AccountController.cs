@@ -20,6 +20,8 @@ namespace Mvc4MusicStore.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private string oktaResponseKey = "oktaResponse";
+
         private void MigrateShoppingCart(string UserName)
         {
             // Associate shopping cart items with logged-in user
@@ -36,18 +38,32 @@ namespace Mvc4MusicStore.Controllers
         private ActionResult RedirectToOktaOrHome(string UserName)
         {
             var redirectUrl = this.Url.Action("Index", "Home", null, this.Request.Url.Scheme);
-            if (HttpContext.Items.Contains(UserName))
+            string cookieTokenUrl = null;
+            AuthResponse response = null;
+
+            if (Session[oktaResponseKey] != null)
             {
-                // FIXME: Get the session from Okta and redirect set the redirectUrl to the RelayState if it's there
+                response = (AuthResponse)Session[oktaResponseKey];
+            }
 
-                // If we have a cookieToken, redirect the user to Okta so that they get a cookie from Okta too.
-                var cookieToken = HttpContext.Items[UserName] as String;
+            if (response.RelayState != null)
+            {
+                redirectUrl = response.RelayState;
+            }
+
+            if (response.SessionToken != null)
+            {
+                var cookieToken = response.SessionToken;
                 var oktaApiUrl = new Uri(ConfigurationManager.AppSettings["okta:ApiUrl"]);
-
-                var cookieTokenUrl = String.Format("{0}login/sessionCookieRedirect?token={1}&redirectUrl={2}",
+                cookieTokenUrl = String.Format("{0}login/sessionCookieRedirect?token={1}&redirectUrl={2}",
                     oktaApiUrl.AbsoluteUri,
                     cookieToken,
-                    redirectUrl);
+                    HttpUtility.UrlEncode(redirectUrl));
+            }
+
+            if(cookieTokenUrl != null)
+            {
+                // If we have a cookieTokenUrl, redirect the user to Okta so that they get a cookie from Okta too.
                 return Redirect(cookieTokenUrl);
             }
             else
@@ -81,21 +97,38 @@ namespace Mvc4MusicStore.Controllers
                 return View(model);
             }
 
-            var authResponseKey = String.Format("{0}_AuthResponse", model.UserName);
-            var oktaStateTokenKey = "oktaStateToken";
+
+            #region if we have a returnUrl, turn it into an absolute URL
+            if (returnUrl != null && returnUrl.Contains('?'))
+            {
+                var parts = returnUrl.Split('?');
+                var uri = new System.UriBuilder(HttpContext.Request.Url.AbsoluteUri);
+                uri.Path = parts[0];
+                uri.Query = parts[1];
+                returnUrl = uri.ToString();
+            }
+            #endregion
+            // Store the relayState in the HttpContext to "pass" it to the OktaMembershipProvider
             HttpContext.Items["relayState"] = returnUrl;
-            // Try the username/password pair
-            // This will return "false" if there is an MFA step, so we will check for that next
-            if (WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            var userValid = WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe);
+            AuthResponse response = null;
+            if (HttpContext.Items.Contains(model.UserName))
+            {
+                response = (AuthResponse)HttpContext.Items[model.UserName];
+                Session[oktaResponseKey] = response;
+
+            }
+
+            // See if the username/password pair was valid.
+            // This will be "false" if there is an MFA step, so we will check for that next.
+            if (userValid)
             {
                 MigrateShoppingCart(model.UserName);
 
                 return RedirectToOktaOrHome(model.UserName);
             }
-            else if (HttpContext.Items.Contains(authResponseKey))
+            else if (response.Status != null)
             {
-                AuthResponse response = (AuthResponse)HttpContext.Items[authResponseKey];
-                Session[oktaStateTokenKey] = response.StateToken;
                 if (response.Status == AuthStatus.MfaEnroll)
                 {
                     return RedirectToLocal("/Mfa/Add");

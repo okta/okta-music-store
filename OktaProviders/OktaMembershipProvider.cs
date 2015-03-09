@@ -124,16 +124,12 @@ namespace OktaProviders
             try
             {
                 string relayState = (string)HttpContext.Current.Items["relayState"];
-                // FIXME: Consider passing in a "context" object.
+                // Let Okta track the relayState as part of the user's session
                 AuthResponse response = okta.authn.Authenticate(username, password, relayState);
-                var cookieToken = response.SessionToken;
+                HttpContext.Current.Items[username] = response;
 
-                string mfaResponseString = String.Format("{0}_AuthResponse", username);
-                HttpContext.Current.Items[mfaResponseString] = response;
-
-                if (response.Status == AuthStatus.Success && cookieToken != null)
+                if (response.Status == AuthStatus.Success)
                 {
-                    HttpContext.Current.Items[username] = cookieToken;
                     return true;
                 }
             }
