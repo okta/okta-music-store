@@ -135,7 +135,7 @@ namespace Mvc4MusicStore.Controllers
 
                 return RedirectToOktaOrHome(model.UserName);
             }
-            else if (response.Status != null)
+            else if (response != null && response.Status != null)
             {
                 if (response.Status == AuthStatus.MfaEnroll)
                 {
@@ -153,6 +153,12 @@ namespace Mvc4MusicStore.Controllers
                 {
                     //  /Account/PasswordReset
                 }
+            }
+            else if (HttpContext.Items.Contains("authnError"))
+            {
+                var reason = (string)HttpContext.Items["authnError"];
+                ModelState.AddModelError("", reason);
+                return View(model);
             }
 
             // If we got this far, something failed, redisplay form

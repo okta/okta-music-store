@@ -136,6 +136,7 @@ namespace OktaProviders
             catch (OktaException e)
             {
                 var reason = e.ErrorSummary;
+                HttpContext.Current.Items["authnError"] = reason;
             }
             return false;
         }
