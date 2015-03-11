@@ -106,6 +106,7 @@ namespace Mvc4MusicStore.Controllers
                 {
                     var parts = returnUrl.Split('?');
                     uri.Path = parts[0];
+                    // FIXME: That this has the entire query string in it.
                     uri.Query = parts[1];
                 }
                 else
