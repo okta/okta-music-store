@@ -13,6 +13,7 @@ using Mvc4MusicStore.Models;
 using OktaProviders;
 using System.Configuration;
 using Okta.Core.Models;
+using System.Web.Helpers;
 
 namespace Mvc4MusicStore.Controllers
 {
@@ -85,11 +86,53 @@ namespace Mvc4MusicStore.Controllers
         //
         // POST: /Account/Login
 
+        private string ProcessOktaRelayState(System.Collections.Specialized.NameValueCollection form)
+        {
+            var relayStateStr = "RelayState";
+            if (form[relayStateStr] == null)
+            {
+                return null;
+            }
+            var relayState = HttpUtility.UrlDecode(form[relayStateStr]);
+            if (relayState.StartsWith("//"))
+            {
+                // Delete the first "/" from the string:
+                // Remove "1" character from the string, starting at position "0"
+                relayState = relayState.Remove(0, 1);
+            }
+            // Use http://example.com because UriBuilder needs a scheme and domain to work
+            var url = String.Format("http://example.com{0}", relayState);
+            var uri = new System.UriBuilder(url);
+            var qs = HttpUtility.ParseQueryString(uri.Query);
+            uri.Query = null;
+            if (qs.Get(relayStateStr) != null)
+            {
+                uri.Query = String.Format("{0}={1}", relayStateStr, qs.Get(relayStateStr));
+            }
+            var relayStateClean = String.Join("", uri.Path, uri.Query);
+            return relayStateClean;
+        }
+
+
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
+            try
+            {
+                AntiForgery.Validate();
+            }
+            catch (HttpAntiForgeryException)
+            {
+                var relayState = ProcessOktaRelayState(Request.Form);
+                if (relayState == null)
+                {
+                    return View(model);
+                }
+                Session["RelayState"] = relayState;
+                return View(model);
+            }
+
             // Immediately return if we have an invalid ModelState
             if (!ModelState.IsValid)
             {
@@ -118,7 +161,14 @@ namespace Mvc4MusicStore.Controllers
             }
             #endregion
             // Store the relayState in the HttpContext to "pass" it to the OktaMembershipProvider
-            HttpContext.Items["relayState"] = returnUrl;
+            if (Session["RelayState"] != null)
+            {
+                returnUrl = (string)Session["RelayState"];
+            }
+            if (returnUrl != null)
+            {
+                HttpContext.Items["relayState"] = returnUrl;
+            }
             var userValid = WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe);
             AuthResponse response = null;
             if (HttpContext.Items.Contains(model.UserName))
