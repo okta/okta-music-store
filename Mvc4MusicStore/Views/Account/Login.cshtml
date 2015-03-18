@@ -25,11 +25,14 @@
             <!-- Input needs to be nested in label, not sure how to do this with LabelFor -->
             <label for="RememberMe">@Html.CheckBoxFor(m => m.RememberMe) Remember me</label>
         </div>
-    <input type="submit" class="btn btn-primary" value="Log in" />
+        <input type="submit" class="btn btn-primary" value="Log in" />
     </div>
-            <p>
-                @Html.ActionLink("Register", "Register") if you don't have an account.
-            </p>
+    <p>
+        @Html.ActionLink("Register", "Register") if you don't have an account.
+    </p>
+    <p>
+        Try an example <a href="https://musicstore-dev-ed.my.salesforce.com/_ui/core/chatter/groups/GroupProfilePage?g=0F9j0000000Lz5C">"deep link"</a> to Chatter.
+    </p>
 }
 </section>
 
