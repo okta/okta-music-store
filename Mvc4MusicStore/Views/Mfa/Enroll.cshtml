@@ -3,7 +3,15 @@
     ViewBag.Title = "Enroll";
 }
 
-<h2>Enroll</h2>
+<h2>Multi-factor authentication Enrollment</h2>
+
+<p>
+    Before you can continue, you must set up "<a href="https://en.wikipedia.org/wiki/Multi-factor_authentication">multi-factor authentication</a>" for your account.
+</p>
+<p>
+    To do this, scan the code below using <a href="https://en.wikipedia.org/wiki/Google_Authenticator">Google Authenticator</a> application 
+    or a <a href="https://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm#Client_implementations">similar application that supports the TOTP password algorithm</a>.
+</p>
 
 @if (ViewBag.FactorType == "token:software:totp")
 {
@@ -18,6 +26,14 @@ else
 {
     <div>The MVC Music Store doesn't support that token type yet.</div>
 }
+
+<br /><br /><br />
+<p class="api-tip">
+    <i class="fa fa-hand-o-right"></i>
+    <a href="http://developer.okta.com/docs/api/rest/authn.html#enroll-factor">
+        This page is setting up MFA for a user with Okta using the <code>/authn</code> Okta API endpoint.
+    </a>
+</p>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

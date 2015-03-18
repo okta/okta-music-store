@@ -113,6 +113,17 @@ namespace Mvc4MusicStore.Controllers
             return relayStateClean;
         }
 
+        private AuthResponse MoveOktaResponseFromHttpContextToSession(string username)
+        {
+            AuthResponse response = null;
+            if (HttpContext.Items.Contains(username))
+            {
+                response = (AuthResponse)HttpContext.Items[username];
+                Session[oktaResponseKey] = response;
+                return response;
+            }
+            return response;
+        }
 
         [HttpPost]
         [AllowAnonymous]
@@ -170,13 +181,7 @@ namespace Mvc4MusicStore.Controllers
                 HttpContext.Items["relayState"] = returnUrl;
             }
             var userValid = WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe);
-            AuthResponse response = null;
-            if (HttpContext.Items.Contains(model.UserName))
-            {
-                response = (AuthResponse)HttpContext.Items[model.UserName];
-                Session[oktaResponseKey] = response;
-
-            }
+            AuthResponse response = MoveOktaResponseFromHttpContextToSession(model.UserName);
 
             // See if the username/password pair was valid.
             // This will be "false" if there is an MFA step, so we will check for that next.
@@ -259,6 +264,7 @@ namespace Mvc4MusicStore.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password, model);
                     WebSecurity.Login(model.UserName, model.Password);
+                    MoveOktaResponseFromHttpContextToSession(model.UserName);
                     MigrateShoppingCart(model.UserName);
                     return RedirectToOktaOrHome(model.UserName);
                 }

@@ -23,12 +23,22 @@ else
     @Html.Partial("_SetPasswordPartial")
 }
 
-<section id="externalLogins">
-    @Html.Action("RemoveExternalLogins")
-
-    <h3>Add an external login</h3>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
+<br /><br /><br />
+<p class="api-tip">
+    <i class="fa fa-hand-o-right"></i>
+    This page 
+    <a href="http://developer.okta.com/docs/api/rest/users.html#get-user">
+        displays user information from Okta
+    </a> 
+    and 
+    <a href="http://developer.okta.com/docs/api/rest/users.html#change-password">
+        allows a user to change their Okta password 
+    </a>
+    using 
+    <a href="http://developer.okta.com/docs/api/rest/users.html">
+    the <code>/users</code> Okta API endpoint.
+    </a>
+</p>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
