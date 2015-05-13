@@ -1,4 +1,6 @@
-﻿using OktaProviders;
+﻿using ComponentSpace.SAML2.Configuration;
+using Mvc4MusicStore.Okta;
+using OktaProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +47,25 @@ namespace Mvc4MusicStore
                 var principal = new System.Security.Principal.GenericPrincipal(identity, roles);
                 HttpContext.Current.User = principal;
             }
+        }
+
+        // FIXME: This MUST not be used on a production system. It is only used in this example for the sake of simplicity.
+        // I suggest moving "Init_ComponentSpace()" to the Application_Start method 
+        // and adding funcitionality to call Init_ComponentSpace whenever your database is updated.
+        protected void Application_BeginRequest(Object source, EventArgs e)
+        {
+            // Run during BeginRequest to get access to the Request object, which simplifies demonstration.
+            var thisUrl = HttpContext.Current.Request.Url;
+            Init_ComponentSpace(thisUrl);
+        }
+
+        protected void Init_ComponentSpace(Uri serverUri)
+        {
+            // FIXME: This uses a static example configuration.
+            // A real production implementation will get this from your in-house datastore (SQL or key/value store)
+            var config = new oktaConfig(serverUri);
+            var samlConfiguration = config.makeComponentSpaceConfig();
+            SAMLConfiguration.Current = samlConfiguration;
         }
     }
 }

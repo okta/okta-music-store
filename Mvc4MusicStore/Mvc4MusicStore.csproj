@@ -41,6 +41,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ComponentSpace.SAML2">
+      <HintPath>C:\Program Files (x86)\ComponentSpace SAML v2.0 for .NET\Bin\dotNET40\ComponentSpace.SAML2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -207,6 +211,7 @@
     <Compile Include="Controllers\GroupManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MfaController.cs" />
+    <Compile Include="Controllers\samlController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\StoreManagerController.cs" />
@@ -229,6 +234,7 @@
     <Compile Include="Models\StoreUser.cs" />
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProviderConfig.cs" />
     <Compile Include="ViewModels\ShoppingCartRemoveViewModel.cs" />
     <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
   </ItemGroup>
@@ -374,6 +380,8 @@
     <Content Include="Views\Mfa\Enroll.cshtml" />
     <Content Include="Views\Mfa\Verify.cshtml" />
     <Content Include="Views\Mfa\_TokenSoftwareTotpPartial.cshtml" />
+    <Content Include="sp.pfx" />
+    <Content Include="test-idp.cer" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
