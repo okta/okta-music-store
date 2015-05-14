@@ -80,8 +80,13 @@ namespace Mvc4MusicStore.Okta
                 // IMPORTANT NOTE: This configuration assumes that a file named "{:key}-idp.cer" is in the directory for this solution.
                 // For example: The configuration below is named "okta", so we will look for a certificate inside a file named "okta-idp.cer".
                 // See the comments in "oktaIdentityProvider.PartnerIdentityProviderConfiguration()" for details about this certificate file configuration.
+		// WARNING WARNING WARNING
+		// Uncomment the code below for testing purposes.
+		// The values below allow you to test using http://saml.oktadev.com
+		// Which means that ANYBODY could log in to your server using that tool.
+		// WARNING WARNING WARNING
                 /*
-                {"test", new ProviderConfig(
+                {"default", new ProviderConfig(
                     // Identity Provider Issuer:
                     "urn:example:idp",
                     // Identity Provider Single Sign-On URL:
@@ -109,8 +114,7 @@ namespace Mvc4MusicStore.Okta
             }
 
             // This configures the default SP. Given the configuration we've done already, I'm not sure why this is needed, but it is
-
-            var defaultSpName = "musicstore";
+            var defaultSpName = "default";
             var defaultConfig = oktaIdpConfigs[defaultSpName].getPartnerServiceProviderConfiguration(defaultSpName, serverUri);
             samlConfiguration.LocalServiceProviderConfiguration = new LocalServiceProviderConfiguration()
             {
