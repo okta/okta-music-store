@@ -44,7 +44,7 @@ section builds upon the last.
 Before you get started, you'll need to install or set up the
 software and services below:
 
-1.  Download and install [Visual Studio Express 2013 for Web](http://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx) or [Visual Studio Community 2015](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx), along with [SQL Server Express 2012](https://www.microsoft.com/en-us/download/details.aspx?id=29062)
+1.  Download and install [Visual Studio Express 2013 for Web](http://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx) or [Visual Studio Community 2015](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx), along with [SQL Server 2012 Express](https://www.microsoft.com/en-us/download/details.aspx?id=29062)
     
     At the time that I write this (January 2015), Visual Studio 2015 is the most
     recent version of Visual Studio available.
