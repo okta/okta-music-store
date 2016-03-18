@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc4MusicStore2015", "Mvc4MusicStore\Mvc4MusicStore2015.csproj", "{2A2D8C7E-ECC0-402C-AD6B-FFA68D5947B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OktaProviders2015", "OktaProviders\OktaProviders2015.csproj", "{458606B8-DC0D-461A-AD58-D5E390F44D34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EE196A0B-C278-4DA9-8CE3-1A5FDF3FFF2C}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A2D8C7E-ECC0-402C-AD6B-FFA68D5947B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A2D8C7E-ECC0-402C-AD6B-FFA68D5947B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A2D8C7E-ECC0-402C-AD6B-FFA68D5947B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A2D8C7E-ECC0-402C-AD6B-FFA68D5947B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{458606B8-DC0D-461A-AD58-D5E390F44D34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{458606B8-DC0D-461A-AD58-D5E390F44D34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{458606B8-DC0D-461A-AD58-D5E390F44D34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{458606B8-DC0D-461A-AD58-D5E390F44D34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
