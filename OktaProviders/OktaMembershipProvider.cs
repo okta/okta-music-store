@@ -126,6 +126,12 @@ namespace OktaProviders
                 string relayState = (string)HttpContext.Current.Items["relayState"];
                 // Let Okta track the relayState as part of the user's session
                 AuthResponse response = okta.authn.Authenticate(username, password, relayState);
+
+                if(response.Status == AuthStatus.Success)
+                {
+                    HttpContext.Current.Items["login"] = response.Embedded.User.Profile.Login;
+                }
+
                 HttpContext.Current.Items[username] = response;
 
                 if (response.Status == AuthStatus.Success)

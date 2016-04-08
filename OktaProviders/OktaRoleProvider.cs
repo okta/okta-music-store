@@ -113,9 +113,25 @@ namespace OktaProviders
         }
         public string[] GetRolesForUser(string username)
         {
-            var oktaUser = okta.users.Get(username);
-            var groups = from grp in okta.users.GetUserGroupsClient(oktaUser) select grp.Profile.Name.ToString();
-            return groups.ToArray<string>();
+            User oktaUser = null;
+            try
+            {
+                oktaUser = okta.users.Get(username);
+
+            }
+            catch (OktaException oe)
+            {
+            //most likely could not find the user because there's more than one user that matches
+            }
+            if (oktaUser != null)
+            {
+                var groups = from grp in okta.users.GetUserGroupsClient(oktaUser) select grp.Profile.Name.ToString();
+                    return groups.ToArray<string>();
+            }
+            else
+            {
+                return null;
+            }
         }
         public void CreateRole(string roleName)
         {

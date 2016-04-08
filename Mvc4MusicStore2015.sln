@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EE196A
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okta.Core", "..\oktasdk-csharp\Okta.Core\Okta.Core.csproj", "{D80CF449-9B1E-4EF3-9EB0-7114C5294E6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{458606B8-DC0D-461A-AD58-D5E390F44D34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{458606B8-DC0D-461A-AD58-D5E390F44D34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{458606B8-DC0D-461A-AD58-D5E390F44D34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D80CF449-9B1E-4EF3-9EB0-7114C5294E6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D80CF449-9B1E-4EF3-9EB0-7114C5294E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D80CF449-9B1E-4EF3-9EB0-7114C5294E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D80CF449-9B1E-4EF3-9EB0-7114C5294E6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

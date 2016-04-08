@@ -34,16 +34,24 @@ namespace Mvc4MusicStore
             {
                 string loggedUser = HttpContext.Current.User.Identity.Name;
                 var memberUser = (OktaMembershipUser)Membership.GetUser(loggedUser);
-                var roles = Roles.GetRolesForUser(loggedUser);
-                var identity = new OktaIdentity(memberUser.UserName, true)
+                if (memberUser != null)
                 {
-                    FirstName = memberUser.FirstName,
-                    LastName = memberUser.LastName,
-                    PhoneNumber = memberUser.PhoneNumber,
-                    Apps = memberUser.apps,
-                };
-                var principal = new System.Security.Principal.GenericPrincipal(identity, roles);
-                HttpContext.Current.User = principal;
+                    
+                   var roles = Roles.GetRolesForUser(loggedUser);
+                    var identity = new OktaIdentity(memberUser.UserName, true)
+                    {
+                        FirstName = memberUser.FirstName,
+                        LastName = memberUser.LastName,
+                        PhoneNumber = memberUser.PhoneNumber,
+                        Apps = memberUser.apps,
+                    };
+                    var principal = new System.Security.Principal.GenericPrincipal(identity, roles);
+                    HttpContext.Current.User = principal;
+                }
+                else
+                {
+                    FormsAuthentication.SignOut();
+                }
             }
         }
     }
