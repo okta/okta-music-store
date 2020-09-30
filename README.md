@@ -1,5 +1,5 @@
 <div id="table-of-contents">
-<h2>Table of Contents</h2>
+<h2>Table O f Contents</h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">1. Introduction</a></li>
@@ -984,4 +984,4 @@ Updates or corrections to this document are very welcome. Feel free
 to send me [pull requests](https://help.github.com/articles/using-pull-requests/) with suggestions.
 
 
-Additionally, please send me comments or questions via email: &#106;&#111;&#101;&#108;&#046;&#102;&#114;&#097;&#110;&#117;&#115;&#105;&#099;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;
+Additionally, please send me your comments or questions via email: &#106;&#111;&#101;&#108;&#046;&#102;&#114;&#097;&#110;&#117;&#115;&#105;&#099;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;
